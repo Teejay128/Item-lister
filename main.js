@@ -1,6 +1,8 @@
+let body = document.querySelector('body')
 let form = document.querySelector('#addForm');
 let itemList = document.querySelector('#items');
 let filter = document.querySelector('#filter');
+let header = document.querySelector('header');
 
 //form submit event
 form.addEventListener('submit', addItem);
@@ -15,41 +17,76 @@ filter.addEventListener('keyup', filterItems);
 //add item
 function addItem(e){
     e.preventDefault();
+    let newItem = document.querySelector('#item');
 
-    //get input value
-    let newItem = document.querySelector('#item').value;
+    if(newItem.value == ''){
+        // ERROR MESSAGE
+    } else {
+        //create new li element
+        let li = document.createElement('li');
+        //add class
+        li.className = 'list-group-items';
+        //add textNode with input value
+        li.innerText = newItem.value;
 
-    //create new li element
-    let li = document.createElement('li');
-    //add class
-    li.className = 'list-group-items';
-    //add textNode with input value
-    li.appendChild(document.createTextNode(newItem));
+        //create del button element
+        let delbtn = document.createElement('button');
 
-    //create del button element
-    let delbtn = document.createElement('button');
+        //add button class
+        delbtn.className = 'deletebtn';
 
-    //add button class
-    delbtn.className = 'deletebtn';
+        //append textNode
+        delbtn.innerHTML = '&times;';
 
-    //append textNode
-    delbtn.appendChild(document.createTextNode('X'));
+        //append button to li
+        li.appendChild(delbtn);
 
-    //append button to li
-    li.appendChild(delbtn);
+        //append li to list
+        itemList.appendChild(li);
 
-    //append li to list
-    itemList.appendChild(li);
+        newItem.value = '';
+    }
 }
 
 //remove item
 function removeItem(e){
     e.preventDefault();
     if(e.target.classList.contains('deletebtn')){
-        if(confirm('Are you sure?')){
+
+        let div = document.createElement('div');
+        div.className = ('delMsg');
+        div.innerHTML = `<p>Are you sure?</p>`
+    
+        let btnDiv = document.createElement('div');
+        btnDiv.className = ('btnDiv');
+    
+        let yesBtn = document.createElement('button');
+        let noBtn = document.createElement('button');
+    
+        yesBtn.className = ('yesBtn');
+        noBtn.className = ('noBtn');
+    
+        yesBtn.innerText = 'yes';
+        noBtn.innerText = 'no';
+    
+        btnDiv.appendChild(yesBtn);
+        btnDiv.appendChild(noBtn);
+        div.appendChild(btnDiv)
+    
+        let wrapper = document.querySelector('.wrapper')
+        body.appendChild(div)
+        wrapper.style.opacity = 0.2;
+    
+        
+        yesBtn.addEventListener('click', () => {
             let li = e.target.parentElement;
             itemList.removeChild(li);
-        }
+            div.remove()
+            wrapper.style.opacity = 1;
+        })
+        noBtn.addEventListener('click', () => {
+            console.log('Okay')
+        })
     }
 }
 

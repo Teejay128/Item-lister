@@ -72,3 +72,38 @@ div#main h2{
     border-radius: 0.5rem;
     border: 0.2rem solid #111;
 }
+
+.delMsg{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: black;
+    color: white;
+    font-size: x-large;
+    opacity: 1;
+}
+
+.btnDiv{
+    position: absolute;
+    right: 20%;
+    top: 20px;
+}
+
+.yesBtn{
+    background-color: #072;
+    color: #fff;
+    padding: 5px;
+    width: 50px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.noBtn{
+    background-color: #f12;
+    color: #fff;
+    padding: 5px;
+    width: 50px;
+    text-align: center;
+    border-radius: 10px;
+}
